@@ -25,8 +25,8 @@ class CheckTimestamp(unittest.TestCase):
         ch_time = int(time.mktime(time.strptime(os.getenv('DATE'), '%Y-%m-%d %H:%M:%S')))#Перевод человекопонятного времени в unix timestamp
         self.driver.get('http://nsk.terminal.ru/')     
         head = self.driver.find_element_by_tag_name('head') #содержимое тега head
-        scripts = self.driver.find_elements_by_tag_name('script') #все скрипты
-        links = self.driver.find_elements_by_tag_name('link') #все подключаемые файлы
+        scripts = head.find_elements_by_tag_name('script') #все скрипты
+        links = head.find_elements_by_tag_name('link') #все подключаемые файлы
 
         for x in scripts:#выполняется поиск нужного скрипта, как толоко он найден - цикл прерывается
             if u'/compiled/js/main' in x.get_attribute('src'):
